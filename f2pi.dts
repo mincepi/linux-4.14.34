@@ -1,0 +1,37 @@
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target = <&uart1>;
+		__overlay__ {
+				compatible = "f2pi";
+				pinctrl-names = "default";
+				pinctrl-0 = <&f2pi_pins>;
+				divider = <2930>;
+				status = "okay";
+				reg = <0x7e215000 0x0100>;
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			f2pi_pins: f2pi_pins {
+				brcm,pins = <14 15>;
+				brcm,function = <1 2>; /* output alt5 */
+				brcm,pull = <2 0>; /* pullup nopull */
+			};
+		};
+	};
+
+	fragment@2 {
+		target-path = "/aliases";
+		__overlay__ {
+			serial0 = "/soc/serial@7e201000";
+		};
+	};
+
+};

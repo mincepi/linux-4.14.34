@@ -1,0 +1,7 @@
+obj-m := pi2hd44780.o m2pi.o f2pi.o
+
+
+
+
+
+
